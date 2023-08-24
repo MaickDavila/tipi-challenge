@@ -3,10 +3,16 @@ export interface IComicItem {
   resourceURI: string;
 }
 
-export interface TComic {
+export interface IComic {
   available: number;
   collectionURI: string;
   items: IComicItem[];
+}
+
+export interface IStories {
+  available: number;
+  collectionURI: string;
+  items: any[];
 }
 
 export interface ISerie {
@@ -21,5 +27,6 @@ export interface ISerie {
     extension: string;
   };
   type: string;
-  comics: TComic;
+  comics: IComic;
+  stories: IStories;
 }

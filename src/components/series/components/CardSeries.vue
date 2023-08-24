@@ -16,20 +16,60 @@ defineProps({
       }"
     ></div>
 
-    <div class="series-card-info">
-      <span>{{ serie?.title }}</span>
-      <p>
-        {{ serie?.startYear }}
-        {{ serie?.startYear != serie?.endYear ? ` - ${serie?.endYear}` : "" }}
-      </p>
+    <div class="series-card-info-container">
+      <div class="series-card-info">
+        <span>{{ serie?.title }}</span>
+
+        <p>
+          {{ serie?.startYear }}
+          {{ serie?.startYear != serie?.endYear ? ` - ${serie?.endYear}` : "" }}
+        </p>
+      </div>
+
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: end;
+          gap: 0.5em;
+        "
+      >
+        <div v-if="serie?.type">
+          <span class="series-card-chip">{{ serie?.type }}</span>
+        </div>
+
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: 0.5em;
+            color: white;
+            width: fit-content;
+            padding: 0 1em;
+            border-radius: 20px;
+            font-size: small;
+          "
+        >
+          <p v-if="serie?.comics">
+            {{ serie?.comics?.available }}
+            {{ serie?.comics?.available > 1 ? "comics" : "comic" }}
+          </p>
+          |
+          <p v-if="serie?.stories">
+            {{ serie?.stories?.available }}
+            {{ serie?.stories?.available > 1 ? "stories" : "story" }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .series-card {
-  height: 18em;
-  width: 14em;
+  height: 24em;
+  width: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 16px;
@@ -46,9 +86,15 @@ defineProps({
   }
 }
 
+.series-card-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+}
+
 .series-card-info {
   width: 14em;
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   color: white;
@@ -56,5 +102,24 @@ defineProps({
   > p {
     color: #7f92ac;
   }
+}
+
+@media (max-width: 768px) {
+  .series-card {
+    height: 16em;
+  }
+
+  .series-card-info {
+    width: 10em;
+  }
+}
+
+.series-card-chip {
+  background-color: #082041;
+  padding: 0.5em;
+  border-radius: 20px;
+  font-size: small;
+  color: white;
+  padding: 0.5em 1em;
 }
 </style>
