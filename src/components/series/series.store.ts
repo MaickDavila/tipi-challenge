@@ -4,7 +4,9 @@ import { ISerie } from "./models/seriesModel";
 
 const state = reactive({
   series: Array<ISerie>(),
-  currentOffset: 1,
+  currentOffset: 0,
+  isCompleteSeries: false,
+  isLoading: false,
 });
 
 const useSeriesStore = {
@@ -19,8 +21,28 @@ const useSeriesStore = {
     return state.currentOffset;
   },
 
-  set currentOffset(currentOffset: number) {
-    state.currentOffset = currentOffset;
+  set currentOffset(offset: number) {
+    state.currentOffset = offset;
+  },
+
+  incraseOffset() {
+    state.currentOffset += 1;
+  },
+
+  get isCompleteSeries(): boolean {
+    return state.isCompleteSeries;
+  },
+
+  set isCompleteSeries(isComplete: boolean) {
+    state.isCompleteSeries = isComplete;
+  },
+
+  get isLoading(): boolean {
+    return state.isLoading;
+  },
+
+  set isLoading(isLoading: boolean) {
+    state.isLoading = isLoading;
   },
 };
 
