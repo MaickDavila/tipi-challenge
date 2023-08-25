@@ -1,10 +1,11 @@
-<template>
-  <div class="layout">
-    <router-view></router-view>
-  </div>
-</template>
+<script setup lang="ts">
+import useHistoryStore from "./components/histories/histories.store";
 
-<style>
-.layout {
-}
-</style>
+const historyStore = useHistoryStore();
+
+historyStore.loadHistoriesFromLocalStorage();
+</script>
+
+<template>
+  <router-view></router-view>
+</template>

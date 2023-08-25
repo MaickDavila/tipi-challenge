@@ -1,1 +1,3 @@
-<template>history</template>
+<template>
+  <histories />
+</template>

@@ -1,1 +1,3 @@
-<template>Detail</template>
+<template>
+  <details-page />
+</template>

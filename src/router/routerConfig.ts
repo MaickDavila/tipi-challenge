@@ -5,7 +5,7 @@ const routerConfig = {
     component: () => import("../views/home.vue"),
   },
   detail: {
-    path: "/detail",
+    path: "/detail/:id",
     name: "detail",
     component: () => import("../views/detail.vue"),
   },

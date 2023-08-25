@@ -1,4 +1,4 @@
-// use Composition API to create a reactive store
+// use Composition API to create a reactive store, without installing other libraries
 import { reactive } from "vue";
 import { ISerie } from "./models/seriesModel";
 
@@ -9,7 +9,7 @@ const state = reactive({
   isLoading: false,
 });
 
-const useSeriesStore = {
+export default {
   get series(): Array<ISerie> {
     return state.series;
   },
@@ -45,5 +45,3 @@ const useSeriesStore = {
     state.isLoading = isLoading;
   },
 };
-
-export default useSeriesStore;

@@ -1,28 +1,51 @@
 <script setup lang="ts">
 import { PropType } from "vue";
 import { ISerie } from "../models/seriesModel.ts";
+import useHistoryStore, { IHistory } from "../../histories/histories.store";
+import { getCurrentFormattedTime } from "../../../utils/useDate";
+import routerConfig from "../../../router/routerConfig";
+//
 
-defineProps({
-  serie: Object as PropType<ISerie>,
+const props = defineProps({
+  serie: {
+    type: Object as PropType<ISerie>,
+    required: true,
+  },
 });
+
+const historyStore = useHistoryStore();
+
+const goToDetails = () => {
+  const history: IHistory = {
+    seriesId: props.serie.id,
+    seriesTitle: props.serie.title,
+    seriesImage: `${props.serie.thumbnail.path}.${props.serie.thumbnail.extension}`,
+    lastDate: getCurrentFormattedTime(),
+  };
+
+  historyStore.addHistory(history);
+  const path = routerConfig.detail.path.replace(":id", String(props.serie.id));
+  window.open(path, "_blank");
+};
 </script>
 
 <template>
-  <div class="flex-col">
+  <div v-if="serie" class="flex-col">
     <div
+      @click="goToDetails"
       class="series-card"
       :style="{
-        backgroundImage: `url(${serie?.thumbnail.path}.${serie?.thumbnail.extension})`,
+        backgroundImage: `url(${serie.thumbnail.path}.${serie.thumbnail.extension})`,
       }"
     ></div>
 
     <div class="series-card-info-container">
       <div class="series-card-info">
-        <span>{{ serie?.title }}</span>
+        <span>{{ serie.title }}</span>
 
         <p>
-          {{ serie?.startYear }}
-          {{ serie?.startYear != serie?.endYear ? ` - ${serie?.endYear}` : "" }}
+          {{ serie.startYear }}
+          {{ serie.startYear != serie.endYear ? ` - ${serie.endYear}` : "" }}
         </p>
       </div>
 
@@ -34,31 +57,19 @@ defineProps({
           gap: 0.5em;
         "
       >
-        <div v-if="serie?.type">
-          <span class="series-card-chip">{{ serie?.type }}</span>
+        <div v-if="serie.type">
+          <span class="series-card-chip">{{ serie.type }}</span>
         </div>
 
-        <div
-          style="
-            display: flex;
-            align-items: center;
-            justify-content: end;
-            gap: 0.5em;
-            color: white;
-            width: fit-content;
-            padding: 0 1em;
-            border-radius: 20px;
-            font-size: small;
-          "
-        >
-          <p v-if="serie?.comics">
-            {{ serie?.comics?.available }}
-            {{ serie?.comics?.available > 1 ? "comics" : "comic" }}
+        <div class="series-card-info-resources">
+          <p v-if="serie.comics">
+            {{ serie.comics.available }}
+            {{ serie.comics.available > 1 ? "comics" : "comic" }}
           </p>
           |
-          <p v-if="serie?.stories">
-            {{ serie?.stories?.available }}
-            {{ serie?.stories?.available > 1 ? "stories" : "story" }}
+          <p v-if="serie.stories">
+            {{ serie.stories.available }}
+            {{ serie.stories.available > 1 ? "stories" : "story" }}
           </p>
         </div>
       </div>
@@ -99,7 +110,7 @@ defineProps({
   flex-direction: column;
   color: white;
 
-  > p {
+  p {
     color: #7f92ac;
   }
 }
@@ -116,10 +127,21 @@ defineProps({
 
 .series-card-chip {
   background-color: #082041;
-  padding: 0.5em;
   border-radius: 20px;
   font-size: small;
   color: white;
   padding: 0.5em 1em;
+}
+
+.series-card-info-resources {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 0.5em;
+  color: white;
+  width: fit-content;
+  padding: 0 1em;
+  border-radius: 20px;
+  font-size: small;
 }
 </style>
