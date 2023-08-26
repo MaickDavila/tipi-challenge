@@ -1,11 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-box">
-      <slot name="title">
-        <div class="main-title">
-          <h1>Title</h1>
-        </div>
-      </slot>
+      <slot name="header"> </slot>
 
       <div class="main-content">
         <slot> </slot>
@@ -40,8 +36,9 @@
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: calc(100vh - 300px);
+  // height: calc(100vh - 300px);
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 20px;
   color: white;
 }

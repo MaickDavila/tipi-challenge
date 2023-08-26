@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const imageUrl =
-  "http://i.annihil.us/u/prod/marvel/i/mg/4/b0/5d939e25a9787.jpg";
 import { IHistory } from "../histories.store";
 
 defineProps({

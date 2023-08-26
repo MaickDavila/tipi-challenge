@@ -1,18 +1,31 @@
+export interface IItem {
+  available: number;
+  collectionURI: string;
+}
+
 export interface IComicItem {
   name: string;
   resourceURI: string;
 }
 
-export interface IComic {
-  available: number;
-  collectionURI: string;
+export interface IComic extends IItem {
   items: IComicItem[];
 }
 
-export interface IStories {
-  available: number;
-  collectionURI: string;
-  items: any[];
+export interface IStoryItem extends IComicItem {
+  type: string;
+}
+
+export interface IStories extends IItem {
+  items: IStoryItem[];
+}
+
+export interface ICreatorItem extends IComicItem {
+  role: string;
+}
+
+export interface ICreator extends IItem {
+  items: ICreatorItem[];
 }
 
 export interface ISerie {
@@ -29,4 +42,5 @@ export interface ISerie {
   type: string;
   comics: IComic;
   stories: IStories;
+  creators: ICreator;
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useGetSeries from "./api/useGetSeries";
+import { getSeries } from "./api/useGetSeries";
 import useSeriesStore from "./series.store";
 //
 
@@ -8,13 +8,13 @@ const isLoadingSeries = computed(() => useSeriesStore.isLoading);
 
 const infiniteScroll = () => {
   useSeriesStore.incraseOffset();
-  useGetSeries();
+  getSeries();
 };
 </script>
 
 <template>
   <marvel-page>
-    <template #title>
+    <template #header>
       <h1 class="title"><b class="text-color-base">Marvel</b> Universe</h1>
     </template>
 

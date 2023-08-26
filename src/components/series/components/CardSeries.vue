@@ -31,13 +31,10 @@ const goToDetails = () => {
 
 <template>
   <div v-if="serie" class="flex-col">
-    <div
+    <card-image
       @click="goToDetails"
-      class="series-card"
-      :style="{
-        backgroundImage: `url(${serie.thumbnail.path}.${serie.thumbnail.extension})`,
-      }"
-    ></div>
+      :imageUrl="`${serie.thumbnail.path}.${serie.thumbnail.extension}`"
+    />
 
     <div class="series-card-info-container">
       <div class="series-card-info">
@@ -57,9 +54,7 @@ const goToDetails = () => {
           gap: 0.5em;
         "
       >
-        <div v-if="serie.type">
-          <span class="series-card-chip">{{ serie.type }}</span>
-        </div>
+        <chip :value="serie.type" v-if="serie.type" />
 
         <div class="series-card-info-resources">
           <p v-if="serie.comics">
@@ -78,25 +73,6 @@ const goToDetails = () => {
 </template>
 
 <style lang="scss">
-.series-card {
-  height: 24em;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
 .series-card-info-container {
   display: flex;
   justify-content: space-between;
@@ -116,21 +92,9 @@ const goToDetails = () => {
 }
 
 @media (max-width: 768px) {
-  .series-card {
-    height: 16em;
-  }
-
   .series-card-info {
     width: 10em;
   }
-}
-
-.series-card-chip {
-  background-color: #082041;
-  border-radius: 20px;
-  font-size: small;
-  color: white;
-  padding: 0.5em 1em;
 }
 
 .series-card-info-resources {

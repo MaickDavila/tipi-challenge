@@ -1,4 +1,5 @@
 import axios from "../../../modules/axios";
+import { ISerie } from "../models/seriesModel";
 import useSeriesStore from "../series.store";
 
 const getParams = () => {
@@ -9,7 +10,7 @@ const getParams = () => {
   };
 };
 
-const getSeries = async () => {
+export const getSeries = async (): Promise<void> => {
   try {
     useSeriesStore.isLoading = true;
     const response = await axios.get("v1/public/series", {
@@ -34,4 +35,17 @@ const getSeries = async () => {
   }
 };
 
-export default getSeries;
+export const getSerie = async (id: number): Promise<ISerie | null> => {
+  try {
+    useSeriesStore.isLoading = true;
+    const response = await axios.get(`v1/public/series/${id}`);
+    const { data } = response;
+    if (data.data.count === 0) return null;
+    return data.data.results[0];
+  } catch (error) {
+    console.error(error);
+    return null;
+  } finally {
+    useSeriesStore.isLoading = false;
+  }
+};

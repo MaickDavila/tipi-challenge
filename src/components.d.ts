@@ -8,7 +8,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CardHistories: typeof import('./components/histories/components/CardHistories.vue')['default']
+    CardImage: typeof import('./components/common/CardImage.vue')['default']
     CardSeries: typeof import('./components/series/components/CardSeries.vue')['default']
+    Chip: typeof import('./components/common/Chip.vue')['default']
     Details: typeof import('./components/details/Details.vue')['default']
     DetailsPage: typeof import('./components/details/DetailsPage.vue')['default']
     Histories: typeof import('./components/histories/Histories.vue')['default']
