@@ -118,7 +118,7 @@ const historyObject = computed(() => {
 });
 
 const blockedGoBack = (): void => {
-  router.go(-1);
+  window.history.forward();
 };
 
 onMounted(() => {
