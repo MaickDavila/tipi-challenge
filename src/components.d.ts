@@ -13,6 +13,7 @@ declare module 'vue' {
     Chip: typeof import('./components/common/Chip.vue')['default']
     Details: typeof import('./components/details/Details.vue')['default']
     DetailsPage: typeof import('./components/details/DetailsPage.vue')['default']
+    HeaderComponent: typeof import('./components/common/headerComponent.vue')['default']
     Histories: typeof import('./components/histories/Histories.vue')['default']
     Loading: typeof import('./components/common/Loading.vue')['default']
     MarvelPage: typeof import('./components/common/MarvelPage.vue')['default']

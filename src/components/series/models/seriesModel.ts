@@ -43,4 +43,6 @@ export interface ISerie {
   comics: IComic;
   stories: IStories;
   creators: ICreator;
+  resourceURI: string;
+  series?: IComicItem | null;
 }

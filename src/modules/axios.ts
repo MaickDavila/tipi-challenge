@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://gateway.marvel.com:443/",
+  baseURL: import.meta.env.VITE_APP_API_URL_BASE,
 });
 
 instance.interceptors.request.use((config) => {

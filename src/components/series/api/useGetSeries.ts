@@ -13,7 +13,7 @@ const getParams = () => {
 export const getSeries = async (): Promise<void> => {
   try {
     useSeriesStore.isLoading = true;
-    const response = await axios.get("v1/public/series", {
+    const response = await axios.get("/series", {
       params: getParams(),
     });
 
@@ -38,7 +38,7 @@ export const getSeries = async (): Promise<void> => {
 export const getSerie = async (id: number): Promise<ISerie | null> => {
   try {
     useSeriesStore.isLoading = true;
-    const response = await axios.get(`v1/public/series/${id}`);
+    const response = await axios.get(`/series/${id}`);
     const { data } = response;
     if (data.data.count === 0) return null;
     return data.data.results[0];

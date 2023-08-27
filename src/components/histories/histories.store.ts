@@ -9,6 +9,7 @@ export interface IHistory {
   seriesTitle: string;
   seriesImage: string;
   lastDate: string;
+  resourceURI: string;
 }
 
 export default defineStore({

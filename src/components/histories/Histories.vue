@@ -3,7 +3,7 @@ import useHistoryStore from "./histories.store";
 //
 const historyStore = useHistoryStore();
 const getHistories = computed(() => historyStore.getHistories);
-const getMarkedList = computed(() => historyStore.getMarkedList);
+// const getMarkedList = computed(() => historyStore.getMarkedList);
 
 onMounted(() => {
   historyStore.loadHistoriesFromLocalStorage();
@@ -12,12 +12,8 @@ onMounted(() => {
 <template>
   <marvel-page>
     <div style="display: flex; flex-direction: column">
-      <div>
-        <pre>{{ getMarkedList }}</pre>
-      </div>
-
       <section>
-        <h2>Historial de Series Vistas</h2>
+        <h2>Historial de Recursos Visitados</h2>
 
         <div style="display: flex; flex-direction: column; gap: 20px">
           <card-histories

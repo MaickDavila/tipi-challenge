@@ -3,7 +3,6 @@ import { PropType } from "vue";
 import { ISerie } from "../models/seriesModel.ts";
 import useHistoryStore, { IHistory } from "../../histories/histories.store";
 import { getCurrentFormattedTime } from "../../../utils/useDate";
-import routerConfig from "../../../router/routerConfig";
 //
 
 const props = defineProps({
@@ -13,26 +12,29 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(["click"]);
+
 const historyStore = useHistoryStore();
 
-const goToDetails = () => {
+const clickOnImageEvent = () => {
   const history: IHistory = {
     seriesId: props.serie.id,
     seriesTitle: props.serie.title,
     seriesImage: `${props.serie.thumbnail.path}.${props.serie.thumbnail.extension}`,
     lastDate: getCurrentFormattedTime(),
+    resourceURI: props.serie.resourceURI,
   };
 
   historyStore.addHistory(history);
-  const path = routerConfig.detail.path.replace(":id", String(props.serie.id));
-  window.open(path, "_blank");
+  emits("click", props.serie);
 };
 </script>
 
 <template>
   <div v-if="serie" class="flex-col">
     <card-image
-      @click="goToDetails"
+      v-if="serie.thumbnail"
+      @click="clickOnImageEvent"
       :imageUrl="`${serie.thumbnail.path}.${serie.thumbnail.extension}`"
     />
 

@@ -8,11 +8,11 @@ defineProps({
 </script>
 
 <template>
-  <span class="series-card-chip">{{ value }}</span>
+  <span class="badge">{{ value }}</span>
 </template>
 
 <style scoped>
-.series-card-chip {
+.badge {
   background-color: #082041;
   border-radius: 20px;
   font-size: small;
