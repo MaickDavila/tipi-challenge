@@ -22,7 +22,7 @@ npm run dev
 ## Variables de entorno
 Para el correcto funcionamiento del proyecto se debe crear un archivo .env en la raíz del proyecto con las siguientes variables de entorno:
 ```
-VITE_APP_MARVEL_PUBLIC_API_KEY=0674132e5d040465222a921364f79938
+VITE_APP_MARVEL_PUBLIC_API_KEY=6fb09ac05e81745b399b42acc8f4978f
 VITE_APP_APP_NAME=tipi_challenge
 VITE_APP_API_URL_BASE=https://gateway.marvel.com/v1/public
 ```
