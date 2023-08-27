@@ -56,7 +56,7 @@ const clickOnImageEvent = () => {
           gap: 0.5em;
         "
       >
-        <chip :value="serie.type" v-if="serie.type" />
+        <badge :value="serie.type" v-if="serie.type" />
 
         <div class="series-card-info-resources">
           <p v-if="serie.comics">

@@ -2,11 +2,11 @@
 import marvelLogo from "../../assets/images/svg/marvel.svg";
 const showMenu = ref(false);
 
-const toggleMenu = () => {
+const toggleMenu = (): void => {
   showMenu.value = !showMenu.value;
 };
 
-const closeMenu = () => {
+const closeMenu = (): void => {
   showMenu.value = false;
 };
 </script>

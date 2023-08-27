@@ -1,18 +1,28 @@
-# Vue 3 + TypeScript + Vite
+# Tipi Challenge
+En este proyecto se uso la ultima version de Vue3 + Vite, las configuraciones son mínimas para el desarrollo.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+- Se esta usando la api de Marvel, para obtener los datos de los personajes y comics.
+- En desarrollo se usa el paquete unplugin-auto-import para importar los componentes nativos de vue
+- Y para los componentes custom del proyecto se usa unplugin-vue-components.
+- Para el manejo de rutas se usa vue-router
+- Para el manejo de estados se usa Pinia, como ejemplo se uso el Composition API en un componente.
+- Para los estilos, se usa unicamente CSS y se usa el preprocesador Sass.
 
-## Recommended IDE Setup
+## Instalación
+Para instalar el proyecto se debe ejecutar el siguiente comando:
+```
+npm install
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support For `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Ejecución
+Para ejecutar el proyecto se debe ejecutar el siguiente comando:
+```
+npm run dev
+```
+## Variables de entorno
+Para el correcto funcionamiento del proyecto se debe crear un archivo .env en la raíz del proyecto con las siguientes variables de entorno:
+```
+VITE_APP_MARVEL_PUBLIC_API_KEY=0674132e5d040465222a921364f79938
+VITE_APP_APP_NAME=tipi_challenge
+VITE_APP_API_URL_BASE=https://gateway.marvel.com/v1/public
+```

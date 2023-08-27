@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Badge: typeof import('./components/common/badge.vue')['default']
     CardHistories: typeof import('./components/histories/components/CardHistories.vue')['default']
     CardImage: typeof import('./components/common/CardImage.vue')['default']
     CardSeries: typeof import('./components/series/components/CardSeries.vue')['default']
@@ -20,6 +21,7 @@ declare module 'vue' {
     Observer: typeof import('./components/common/Observer.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SavedPin: typeof import('./components/common/savedPin.vue')['default']
     Series: typeof import('./components/series/Series.vue')['default']
   }
 }

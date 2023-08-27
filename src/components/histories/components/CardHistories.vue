@@ -11,7 +11,7 @@ const props = defineProps({
 
 const router = useRouter();
 
-const goToDetails = () => {
+const goToDetails = (): void => {
   const resourceURI = props.history.resourceURI;
   const type = resourceURI.split("/").slice(-2)[0];
 

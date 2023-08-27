@@ -4,6 +4,7 @@ import useHistoryStore from "./components/histories/histories.store";
 const historyStore = useHistoryStore();
 
 historyStore.loadHistoriesFromLocalStorage();
+historyStore.loadMarkedListFromLocalStorage();
 </script>
 
 <template>
@@ -21,10 +22,3 @@ historyStore.loadHistoriesFromLocalStorage();
     </router-view>
   </main>
 </template>
-
-<style scoped>
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-</style>

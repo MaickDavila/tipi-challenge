@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { IComicItem, ISerie } from "../series/models/seriesModel";
 import useSerieStore from "../series/series.store";
-import { getResource } from "../details/api/useGetComics";
+import { getResource } from "../details/api/useGetResource";
 import routerConfig from "../../router/routerConfig";
+import { IHistory } from "../histories/histories.store";
+import { getCurrentFormattedTime } from "../../utils/useDate";
 
 const router = useRouter();
 const resource = ref<ISerie>();
@@ -13,7 +15,7 @@ const serie = ref<IComicItem | null>();
 
 const isLoading = computed(() => useSerieStore.isLoading);
 
-const setResource = async () => {
+const setResource = async (): Promise<void> => {
   const type = router.currentRoute.value.params.type;
   const resourceURI = router.currentRoute.value.params.id.toString();
   const resourceId = resourceURI.split("/").pop();
@@ -43,7 +45,7 @@ const setResource = async () => {
   });
 };
 
-const setAllResources = async () => {
+const setAllResources = async (): Promise<void> => {
   if (!resourcesResponse.value) return;
   try {
     await Promise.all(
@@ -61,9 +63,8 @@ const goToResource = async (
   value: ISerie,
   type: string,
   newWindow: boolean = true
-) => {
+): Promise<void> => {
   if (!newWindow) {
-    console.log("value", value);
     router.replace({
       name: "detail",
       params: {
@@ -90,18 +91,13 @@ const goToResource = async (
   window.open(routeData.href, "_blank");
 };
 
-const goToTop = () => {
+const goToTop = (): void => {
   nextTick(() => {
     window.scrollTo(0, 0);
   });
 };
 
-onMounted(() => {
-  setResource();
-  goToTop();
-});
-
-const goToOwnerBreadcrumb = () => {
+const goToOwnerBreadcrumb = (): void => {
   if (!serie.value) return;
   goToResource(
     { resourceURI: serie.value.resourceURI } as ISerie,
@@ -109,6 +105,28 @@ const goToOwnerBreadcrumb = () => {
     false
   );
 };
+
+const historyObject = computed(() => {
+  if (!resource.value) return null;
+  return {
+    seriesId: resource.value.id,
+    seriesTitle: resource.value.title,
+    seriesImage: `${resource.value.thumbnail.path}.${resource.value.thumbnail.extension}`,
+    lastDate: getCurrentFormattedTime(),
+    resourceURI: resource.value.resourceURI,
+  } as IHistory;
+});
+
+const blockedGoBack = (): void => {
+  router.go(-1);
+};
+
+onMounted(() => {
+  setResource();
+  goToTop();
+
+  window.addEventListener("popstate", blockedGoBack);
+});
 </script>
 
 <template>
@@ -160,12 +178,16 @@ const goToOwnerBreadcrumb = () => {
         }"
       >
         <section class="detail-box" v-if="resource">
-          <card-image
-            :imageUrl="`${resource.thumbnail.path}.${resource.thumbnail.extension}`"
-            width="400px"
-            height="500px"
-            static
-          />
+          <div :style="{ position: 'relative' }">
+            <card-image
+              :imageUrl="`${resource.thumbnail.path}.${resource.thumbnail.extension}`"
+              width="400px"
+              height="500px"
+              static
+            />
+
+            <saved-pin :resource="historyObject" />
+          </div>
 
           <div class="detail-box__description">
             <div>
@@ -177,7 +199,7 @@ const goToOwnerBreadcrumb = () => {
 
             <div class="type" v-if="resource.type">
               Type:
-              <chip :value="resource.type" />
+              <badge :value="resource.type" />
             </div>
 
             <div
